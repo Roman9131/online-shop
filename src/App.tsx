@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { Link } from 'react-router-dom';
+import './App.sass';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           Learn React
         </a>
       </header>
+      <div><Link to='/card-list'>Go to Page CardsListPage</Link></div>
     </div>
   );
 };
