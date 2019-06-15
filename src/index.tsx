@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import './index.sass';
 import App from './App';
-import CardsListPage from './containers/cardsListPage'
+import CardsListContainer from './containers/cardsListContainer'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Router>
     <div>
       <Route exact path="/" component={App}/>
-      <Route exact path="/card-list" component={CardsListPage}/>
+      <Route exact path="/card-list" component={CardsListContainer}/>
     </div>
   </Router>
   , document.getElementById('root'));
