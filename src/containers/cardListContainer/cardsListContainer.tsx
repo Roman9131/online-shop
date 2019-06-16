@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import './cardListContainer.sass';
-import { addProductToBasket } from '../../actions';
-import * as types from '../../constants';
-import { BasketState } from '../../redusers/basket';
-import { Dispatch } from 'redux';
+import {addProductToBasket, getProductCardsList } from '../../actions/index';
+import {BasketState} from '../../redusers/basket';
+import {Dispatch} from 'redux';
 
 interface StateProps {
   basket: BasketState,
@@ -14,6 +12,7 @@ interface StateProps {
 
 interface DispatchProps {
   addProductToBasket: (id: string) => void;
+  getProductCardsList: () => void;
 }
 
 const mapStateToProps = (state: any): StateProps => {
@@ -22,28 +21,22 @@ const mapStateToProps = (state: any): StateProps => {
   }
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
+const mapDispatchToProps = (dispatch: any): DispatchProps => {
   return {
     addProductToBasket: (id: string) => dispatch(addProductToBasket(id)),
+    getProductCardsList: () => dispatch(getProductCardsList()),
   }
 };
 
 class CardsListContainer extends React.Component<StateProps & DispatchProps> {
 
-  componentDidMount(){
+  componentDidMount() {
     this.getDataList()
   }
 
   private getDataList(): void {
-    const {addProductToBasket} = this.props;
-    axios(types.CONTRACTS_BREACH_CODES_SERVICE_URL)
-      .then(result => {
-        console.log(result);
-        addProductToBasket('1')
-        }
-      ).catch(error => {
-      console.log(error)
-      });
+    const {getProductCardsList} = this.props;
+    getProductCardsList();
   }
 
   render() {
