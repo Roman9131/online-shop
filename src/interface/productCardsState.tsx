@@ -1,10 +1,7 @@
+import { ProductCard } from '../model/productCard';
+
 export interface ProductCardsState {
-  cardsList: CardsList;
+  list: ProductCard[];
+  isLoading: boolean;
+  error: boolean;
 }
-
-export interface CardsList {
-  list: any[],
-  isLoading: boolean,
-  error: boolean,
-}
-

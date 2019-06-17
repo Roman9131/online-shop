@@ -8,8 +8,8 @@ const App: React.FC = () => {
     <div>
       <Router>
         <div>
-          <Route exact path="/" component={Main}/>
-          <Route exact path="/card-list" component={CardsListContainer}/>
+          <Route path="/" exact component={Main}/>
+          <Route path="/results" component={CardsListContainer}/>
         </div>
       </Router>
     </div>

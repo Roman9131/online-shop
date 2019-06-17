@@ -1,34 +1,33 @@
 import * as types from '../constants';
-import {ProductCardsState} from '../interface/productCardsState';
+import { ProductCardsState } from '../interface/productCardsState';
+import { AnyAction } from 'redux';
 
 const defaultState: ProductCardsState = {
-  cardsList: {
-    list: [],
-    isLoading: false,
-    error: false,
-  },
+  list: [],
+  isLoading: false,
+  error: false,
 };
 
-export default function productCards(state = defaultState, action: any) {
+export default function productCards(state = defaultState, action: AnyAction) {
   switch (action.type) {
-    case types.REQUEST_PRODUCT_CARDS_LIST:
+    case types.ASYNC_GET_PRODUCTS_LIST:
       return {
-        ...state.cardsList,
+        ...state,
         isLoading: true,
       };
-    case types.RECEIVE_PRODUCT_CARDS_LIST:
+    case types.ASYNC_GET_PRODUCTS_LIST_SUCCESS:
       return {
-        ...state.cardsList,
+        ...state,
         isLoading: false,
-        list: action.data
+        list: action.data,
       };
-    case types.REJECT_PRODUCT_CARDS_LIST:
+    case types.ASYNC_GET_PRODUCTS_LIST_ERROR:
       return {
-        ...state.cardsList,
+        ...state,
         isLoading: false,
-        error: action.error
+        error: action.error,
       };
     default:
-      return state
+      return state;
   }
 }

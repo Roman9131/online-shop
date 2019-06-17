@@ -8,7 +8,7 @@ export default class Main extends React.Component<any, any> {
     return (
       <div className="page-container">
         <div>MainPage</div>
-        <Link to='/card-list'>Go to CardListContainer</Link>
+        <Link to="/results">Go to CardListContainer</Link>
       </div>
     );
   }
