@@ -1,23 +1,18 @@
-import { ProductCard } from '../model/productCard';
-import * as types from '../constants';
-import axios from 'axios';
 import { Action, Dispatch } from 'redux';
-
-// Common
-type ActionWithData<D> = Action & {data: D};
-// Error
-type ErrorAction = Action & {error: string};
+import { AxiosResponse, AxiosError } from 'axios';
+import * as types from '../constants';
+import { ProductCard } from '../model/productCard';
+import { ActionWithData, ErrorAction } from './index';
+import { axiosGetProductsList } from '../api';
 
 export function getProductsList() {
   return (dispatch: Dispatch) => {
     dispatch(asyncGetProductsList());
-    axios(types.CONTRACTS_BREACH_CODES_SERVICE_URL)
-      .then((data: any) => {
-        dispatch(asyncGetProductsListSuccess(data));
-      },
-      ).catch((error: any) => {
-        dispatch(asyncGetProductsListError(error));
-      });
+    axiosGetProductsList().then((response: AxiosResponse<ProductCard[]>) => {
+      dispatch(asyncGetProductsListSuccess(response.data));
+    }).catch((error: AxiosError) => {
+      dispatch(asyncGetProductsListError(error.message));
+    });
   };
 }
 

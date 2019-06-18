@@ -1,10 +1,5 @@
 import * as types from '../constants';
-import { Action } from 'redux';
-
-// Common
-type ActionWithData<D> = Action & {data: D};
-// Error
-type ErrorAction = Action & {error: string};
+import { ActionWithData } from './index';
 
 export function addProductToBasket(id: string): ActionWithData<string> {
   return {

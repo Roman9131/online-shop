@@ -1,6 +1,12 @@
 import * as types from '../constants';
-import { ProductCardsState } from '../interface/productCardsState';
 import { AnyAction } from 'redux';
+import { ProductCard } from '../model/productCard';
+
+export interface ProductCardsState {
+  list: ProductCard[];
+  isLoading: boolean;
+  error: boolean;
+}
 
 const defaultState: ProductCardsState = {
   list: [],

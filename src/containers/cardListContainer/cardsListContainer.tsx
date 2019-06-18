@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './cardListContainer.sass';
-import { addProductToBasket, getProductsList } from '../../actions/index';
+import { addProductToBasket, getProductsList } from '../../actions';
 import { CartState } from '../../redusers/cart';
+import './cardListContainer.sass';
 
 interface StateProps {
   cart: CartState;
