@@ -1,33 +1,35 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addProductToBasket, getProductsList } from '../../actions';
-import { CartState } from '../../redusers/cart';
-import './cardListContainer.sass';
 
-interface StateProps {
+import { addProductToCart, getProductsList } from '../actions';
+import { CartState } from '../redusers/cart';
+import { IStore } from '../redusers';
+import '../styles/productsList.sass';
+
+interface IPropsFromState {
   cart: CartState;
 }
 
-interface DispatchProps {
+interface IPropsFromDispatch {
   addProductToBasket: (id: string) => void;
   getProductsList: () => void;
 }
 
-const mapStateToProps = (state: any): StateProps => {
+const mapStateToProps = (state: IStore): IPropsFromState => {
   return {
     cart: state.cart,
   };
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => {
+const mapDispatchToProps = (dispatch: any): IPropsFromDispatch => {
   return {
-    addProductToBasket: (id: string) => dispatch(addProductToBasket(id)),
+    addProductToBasket: (id: string) => dispatch(addProductToCart(id)),
     getProductsList: () => dispatch(getProductsList()),
   };
 };
 
-class CardsListContainer extends React.Component<StateProps & DispatchProps> {
+class ProductsList extends React.Component<IPropsFromState & IPropsFromDispatch> {
 
   componentDidMount() {
     this.getDataList();
@@ -48,4 +50,4 @@ class CardsListContainer extends React.Component<StateProps & DispatchProps> {
   }
 }
 
-export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(CardsListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

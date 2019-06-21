@@ -1,1 +1,1 @@
-export const ADD_PRODUCT_TO_BASKET = 'ADD_PRODUCT_TO_BASKET';
+export const ADD_PRODUCT_TO_CART: string = 'ADD_PRODUCT_TO_CART';

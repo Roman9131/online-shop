@@ -1,14 +1,15 @@
 import { Action, Dispatch } from 'redux';
 import { AxiosResponse, AxiosError } from 'axios';
+
 import * as types from '../constants';
-import { ProductCard } from '../model/productCard';
+import { IProductCard } from '../@types/productCard';
 import { ActionWithData, ErrorAction } from './index';
 import { axiosGetProductsList } from '../api';
 
 export function getProductsList() {
   return (dispatch: Dispatch) => {
     dispatch(asyncGetProductsList());
-    axiosGetProductsList().then((response: AxiosResponse<ProductCard[]>) => {
+    axiosGetProductsList().then((response: AxiosResponse<IProductCard[]>) => {
       dispatch(asyncGetProductsListSuccess(response.data));
     }).catch((error: AxiosError) => {
       dispatch(asyncGetProductsListError(error.message));
@@ -22,7 +23,7 @@ export function asyncGetProductsList(): Action {
   };
 }
 
-export function asyncGetProductsListSuccess(list: ProductCard[]): ActionWithData<ProductCard[]> {
+export function asyncGetProductsListSuccess(list: IProductCard[]): ActionWithData<IProductCard[]> {
   return {
     type: types.ASYNC_GET_PRODUCTS_LIST_SUCCESS,
     data: list,

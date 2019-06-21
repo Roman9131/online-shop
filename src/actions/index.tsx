@@ -1,3 +1,3 @@
-export * from './cardListActions';
+export * from './productsList';
 export * from './cartActions';
-export * from './actionsTypes';
+export * from '../@types/actionsTypes';

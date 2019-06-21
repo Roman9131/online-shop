@@ -1,20 +1,20 @@
 import * as types from '../constants';
-import { AnyAction } from 'redux';
-import { ProductCard } from '../model/productCard';
+import { Reducer } from 'redux';
+import { IProductCard } from '../@types/productCard';
 
-export interface ProductCardsState {
-  list: ProductCard[];
+export interface IProductListState {
+  list: IProductCard[];
   isLoading: boolean;
   error: boolean;
 }
 
-const defaultState: ProductCardsState = {
+const defaultState: IProductListState = {
   list: [],
   isLoading: false,
   error: false,
 };
 
-export default function productCards(state = defaultState, action: AnyAction) {
+export const productsList: Reducer<IProductListState> = (state = defaultState, action) => {
   switch (action.type) {
     case types.ASYNC_GET_PRODUCTS_LIST:
       return {
@@ -36,4 +36,4 @@ export default function productCards(state = defaultState, action: AnyAction) {
     default:
       return state;
   }
-}
+};

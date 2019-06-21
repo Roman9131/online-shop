@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ProductCard } from '../model/productCard';
+import { IProductCard } from '../@types/productCard';
 
-const API_DATA_URL = 'http://localhost:3100/data';
+const API_DATA_URL: string = 'http://localhost:3100/data';
 
 export const axiosGetProductsList = () => {
-  return axios.get<ProductCard[]>(API_DATA_URL);
+  return axios.get<IProductCard[]>(API_DATA_URL);
 };

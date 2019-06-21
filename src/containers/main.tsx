@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import './main.sass';
+import '../styles/main.sass';
 
 export default class Main extends React.Component<any, any> {
 
