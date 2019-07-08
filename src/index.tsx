@@ -1,7 +1,7 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import reactDom from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import './index.sass';
@@ -11,10 +11,10 @@ import redusers from './redusers';
 
 const store = createStore(
   redusers,
-  applyMiddleware(thunk),
+  applyMiddleware(reduxThunk),
 );
 
-ReactDOM.render(
+reactDom.render(
   <Provider store={store}>
     <App/>
   </Provider>,

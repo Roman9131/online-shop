@@ -1,13 +1,22 @@
-import { Action, Dispatch } from 'redux';
+import { Action, Dispatch, AnyAction } from 'redux';
 import { AxiosResponse, AxiosError } from 'axios';
 
 import * as types from '../constants';
 import { IProductCard } from '../@types/productCard';
-import { ActionWithData, ErrorAction } from './index';
 import { axiosGetProductsList } from '../api';
 
-export function getProductsList() {
-  return (dispatch: Dispatch) => {
+export interface IProductsAction {
+  type: string;
+  list: IProductCard[];
+}
+
+export interface IGetProductsList {(): (dispatch: Dispatch) => void; }
+export interface IAsyncGetProductsList { (): Action; }
+export interface IAsyncGetProductsListError { (error: any): AnyAction; }
+export interface IAsyncGetProductsListSuccess { (list: IProductCard[]): IProductsAction; }
+
+export const getProductsList: IGetProductsList  = () => {
+  return (dispatch) => {
     dispatch(asyncGetProductsList());
     axiosGetProductsList().then((response: AxiosResponse<IProductCard[]>) => {
       dispatch(asyncGetProductsListSuccess(response.data));
@@ -15,24 +24,18 @@ export function getProductsList() {
       dispatch(asyncGetProductsListError(error.message));
     });
   };
-}
+};
 
-export function asyncGetProductsList(): Action {
-  return {
-    type: types.ASYNC_GET_PRODUCTS_LIST,
-  };
-}
+export const asyncGetProductsList: IAsyncGetProductsList = () => ({
+  type: types.ASYNC_GET_PRODUCTS_LIST,
+});
 
-export function asyncGetProductsListSuccess(list: IProductCard[]): ActionWithData<IProductCard[]> {
-  return {
-    type: types.ASYNC_GET_PRODUCTS_LIST_SUCCESS,
-    data: list,
-  };
-}
+export const asyncGetProductsListSuccess: IAsyncGetProductsListSuccess = list => ({
+  list,
+  type: types.ASYNC_GET_PRODUCTS_LIST_SUCCESS,
+});
 
-export function asyncGetProductsListError(error: string): ErrorAction {
-  return {
-    error,
-    type: types.ASYNC_GET_PRODUCTS_LIST_ERROR,
-  };
-}
+export const asyncGetProductsListError: IAsyncGetProductsListError = error => ({
+  error,
+  type: types.ASYNC_GET_PRODUCTS_LIST_ERROR,
+});

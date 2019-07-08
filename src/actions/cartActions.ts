@@ -1,9 +1,14 @@
 import * as types from '../constants';
-import { ActionWithData } from './index';
+import { IProductCard } from '../@types/productCard';
 
-export function addProductToCart(id: string): ActionWithData<string> {
-  return {
-    type: types.ADD_PRODUCT_TO_CART,
-    data: id,
-  };
-}
+type CartActionType = {
+  type: string;
+  product: IProductCard;
+};
+
+export interface IAddProductToCart {(product: IProductCard): CartActionType; }
+
+export const addProductToCart: IAddProductToCart = (product: IProductCard) => ({
+  product,
+  type: types.ADD_PRODUCT_TO_CART,
+});

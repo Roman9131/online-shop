@@ -1,5 +1,6 @@
-import * as types from '../constants';
 import { Reducer } from 'redux';
+
+import * as types from '../constants';
 import { IProductCard } from '../@types/productCard';
 
 export interface IProductListState {
@@ -20,12 +21,14 @@ export const productsList: Reducer<IProductListState> = (state = defaultState, a
       return {
         ...state,
         isLoading: true,
+        list: [],
+        error: false,
       };
     case types.ASYNC_GET_PRODUCTS_LIST_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        list: action.data,
+        list: action.list,
       };
     case types.ASYNC_GET_PRODUCTS_LIST_ERROR:
       return {
