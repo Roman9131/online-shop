@@ -67,7 +67,7 @@ class ProductsList extends React.PureComponent<IPropsFromState & IPropsFromDispa
       state: { searchTerm },
       props: {
         productsList: { list, error, isLoading },
-        cart: { list: selectedItems },
+        cart: { selectedProductsList: selectedItems },
       },
     } = this;
 
@@ -83,7 +83,7 @@ class ProductsList extends React.PureComponent<IPropsFromState & IPropsFromDispa
           <div className="products-wrapper">
             {list.length !== 0 && list.map((item: IProductCard) => {
               const isSelected: boolean = selectedItems &&
-                selectedItems.findIndex(el => el.id === item.id) !== -1;
+                selectedItems.findIndex(el => el.product.id === item.id) !== -1;
               return (
                 <ProductItem
                   productItem={item}
