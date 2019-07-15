@@ -1,27 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Link } from 'react-router-dom';
-import './App.sass';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+import ProductsList from './containers/productsList';
+import Cart from './containers/cart';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div><Link to='/card-list'>Go to Page CardsListPage</Link></div>
-    </div>
+      <Router>
+          <Route path="/" exact component={ProductsList}/>
+          <Route path="/cart" component={Cart}/>
+      </Router>
   );
 };
 
