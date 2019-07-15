@@ -13,23 +13,23 @@ import {
 } from '../actions';
 import CartSelectedItem from '../components/CartSelectedItem';
 
-interface IPropsFromState {
+interface IMappedProps {
   cart: CartState;
 }
 
-interface IPropsFromDispatch {
+interface IDispatchedProps {
   deleteProductFromCart: IDeleteProductFromCart;
   incrementProductQuantity: IProductQuantityIncrement;
   decrementProductQuantity: IDecrementProductQuantity;
 }
 
-const mapStateToProps = (state: IStore): IPropsFromState => {
+const mapStateToProps = (state: IStore): IMappedProps => {
   return {
     cart: state.cart,
   };
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IPropsFromDispatch => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispatchedProps => {
   return {
     deleteProductFromCart: (id: string) => dispatch(deleteProductFromCart(id)),
     incrementProductQuantity: (id: string) => dispatch(incrementProductQuantity(id)),
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IPropsF
   };
 };
 
-class Cart extends React.Component<IPropsFromState & IPropsFromDispatch> {
+class Cart extends React.Component<IMappedProps & IDispatchedProps> {
 
   private deleteProductFromCart = (id: string) => () => {
     const { deleteProductFromCart } = this.props;
@@ -62,7 +62,7 @@ class Cart extends React.Component<IPropsFromState & IPropsFromDispatch> {
     } = this;
 
     return (
-      <div className="page-container">
+      <div>
         <div>Корзина</div>
         <Link to="/">Вернуться к списку товаров</Link>
         <div className="card-list">

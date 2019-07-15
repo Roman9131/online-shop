@@ -1,6 +1,6 @@
-import './styles.sass';
-import { Button } from '../Button';
 import * as React from 'react';
+
+import './styles.sass';
 import { ISelectedProductList } from '../../redusers/cart';
 import QuantityProductSetter from '../QuantityProductSetter';
 import cartIcon from '../../images/cart-icon.svg';
@@ -12,12 +12,12 @@ interface ICartSelectedItemProps {
   onDecrementProductClick: () => void;
 }
 
-class CartSelectedItem extends React.PureComponent<ICartSelectedItemProps> {
+export default class CartSelectedItem extends React.PureComponent<ICartSelectedItemProps> {
   render() {
     const {
       props: {
         productItem: {
-          product: { imageUrlSmallSize, price, id, currency, name, rating },
+          product: { imageUrlSmallSize, price, currency, name },
           quantityOfProduct,
         },
         onDeleteFromCartClick,
@@ -29,7 +29,7 @@ class CartSelectedItem extends React.PureComponent<ICartSelectedItemProps> {
     const totalCosts: number = quantityOfProduct * price;
 
     return (
-      <div className="product-row-wrapper">
+      <div className="product-row">
         <div className="cart-image-wrapper">
           <img className="cart-image" alt={name} src={imageUrlSmallSize}/>
         </div>
@@ -48,6 +48,5 @@ class CartSelectedItem extends React.PureComponent<ICartSelectedItemProps> {
       </div>
     );
   }
-};
+}
 
-export default CartSelectedItem;

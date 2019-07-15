@@ -1,15 +1,15 @@
 import * as types from '../constants';
+import { Action } from 'redux';
+
 import { IProductCard } from '../@types/productCard';
 
-type CartProductActionType = {
-  type: string;
+interface CartProductActionType extends Action {
   product: IProductCard;
-};
+}
 
-type CartProductIdActionType = {
-  type: string;
+interface CartProductIdActionType extends Action {
   id: string;
-};
+}
 
 export interface IAddProductToCart {(product: IProductCard): CartProductActionType; }
 export interface IDeleteProductFromCart {(id: string): CartProductIdActionType; }

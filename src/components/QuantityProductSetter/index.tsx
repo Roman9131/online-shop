@@ -14,11 +14,11 @@ const QuantityProductSetter = (
   const decrementButtonDiabled: boolean = quantityOfProduct === 1;
   const incrementButtonDiabled: boolean = quantityOfProduct > 98;
   return (
-    <div className="quantity-product-wrapper">
+    <div className="quantity-product">
       <Button disabled={decrementButtonDiabled}
               className="button-decrement"
               onClick={onDecrementProductClick}/>
-      <div className="product-quantity">{quantityOfProduct}</div>
+      <div className="product-counter">{quantityOfProduct}</div>
       <Button disabled={incrementButtonDiabled}
               className="button-increment"
               onClick={onIncrementProductClick}/>

@@ -5,16 +5,16 @@ import './styles.sass';
 import { Button } from '../Button';
 import { IProductCard } from '../../@types/productCard';
 
-interface IProductItemProps {
+interface IProductsItemProps {
   isSelected: boolean;
-  productItem: IProductCard;
+  productsItem: IProductCard;
   onAddToCartClick: () => void;
 }
 
-const ProductItem = ({ isSelected, productItem, onAddToCartClick }: IProductItemProps) => {
-  const { name, price, currency, imageUrlSmallSize } = productItem;
+const ProductItem = ({ isSelected, productsItem, onAddToCartClick }: IProductsItemProps) => {
+  const { name, price, currency, imageUrlSmallSize } = productsItem;
   return (
-    <div className="product-wrapper">
+    <div className="product">
       <div className="image-wrapper">
         <img className="image" alt={name} src={imageUrlSmallSize}/>
       </div>

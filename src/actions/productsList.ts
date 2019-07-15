@@ -5,8 +5,7 @@ import * as types from '../constants';
 import { IProductCard } from '../@types/productCard';
 import { axiosGetProductsList } from '../api';
 
-export interface IProductsAction {
-  type: string;
+export interface IProductsAction extends Action {
   list: IProductCard[];
 }
 
@@ -31,11 +30,11 @@ export const asyncGetProductsList: IAsyncGetProductsList = () => ({
 });
 
 export const asyncGetProductsListSuccess: IAsyncGetProductsListSuccess = list => ({
-  list,
   type: types.ASYNC_GET_PRODUCTS_LIST_SUCCESS,
+  list,
 });
 
 export const asyncGetProductsListError: IAsyncGetProductsListError = error => ({
-  error,
   type: types.ASYNC_GET_PRODUCTS_LIST_ERROR,
+  error,
 });

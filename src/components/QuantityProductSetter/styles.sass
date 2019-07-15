@@ -1,53 +1,52 @@
-.quantity-product-wrapper
+.quantity-product
   display: flex
-  border: 1.2px solid #dddddd
-  margin: 10px 0
   padding: 0
-  border-radius: 3px
+  margin: 10px 0
   width: 60px
+  border: 1.2px solid #dddddd
+  border-radius: 3px
 
-.product-quantity
+.product-counter
+  width: 20px
+  height: 20px
   text-align: center
   line-height: 20px
-  width: 20px
-  height: 20px
 
 .button-increment
+  position: relative
+  height: 20px
+  width: 20px
   border: none
   border-radius: 0
-  position: relative
-  width: 20px
-  height: 20px
   &:after, &:before
     content: ""
     position: absolute
     background: #222222
     transition: transform 0.25s ease-out
   &:after
+    margin-top: -1px
+    width: 50%
     top: 50%
     left: 25%
-    width: 50%
     height: 1.5px
-    margin-top: -1px
   &:before
     top: 24%
     left: 50%
+    margin-left: -1.1px
     width: 1.5px
     height: 50%
-    margin-left: -1.1px
   &:hover
     cursor: pointer
   &:disabled
     opacity: 0.5
     cursor: default
 
-
 .button-decrement
-  border: none
-  border-radius: 0
   position: relative
   width: 20px
   height: 20px
+  border: none
+  border-radius: 0
   &:after
     content: ""
     position: absolute
@@ -56,9 +55,9 @@
   &:after
     top: 50%
     left: 25%
+    margin-top: -1px
     width: 50%
     height: 1.5px
-    margin-top: -1px
   &:hover
     cursor: pointer
   &:disabled
