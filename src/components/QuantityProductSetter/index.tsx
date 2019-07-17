@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import './styles.sass';
 import { Button } from '../Button';
 
 interface IProductItemProps {
   quantityOfProduct: number;
-  onIncrementProductClick: () => void;
-  onDecrementProductClick: () => void;
+  onIncrementProductClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onDecrementProductClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const QuantityProductSetter = (

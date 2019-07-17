@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 import '../styles/cart.sass';
 import { IStore } from '../redusers';
+import CartSelectedItem from '../components/CartSelectedItem';
 import { CartState, ISelectedProductList } from '../redusers/cart';
-import { ThunkDispatch } from 'redux-thunk';
 import {
   deleteProductFromCart, IDeleteProductFromCart,
   incrementProductQuantity, IProductQuantityIncrement,
   decrementProductQuantity, IDecrementProductQuantity,
 } from '../actions';
-import CartSelectedItem from '../components/CartSelectedItem';
 
 interface IMappedProps {
   cart: CartState;

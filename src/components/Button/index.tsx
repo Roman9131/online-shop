@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, MouseEvent } from 'react';
 
 import './styles.sass';
 
@@ -6,7 +6,7 @@ interface IButtonProps {
   type?: 'button' | 'reset' | 'submit';
   className?: string;
   children?: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
 

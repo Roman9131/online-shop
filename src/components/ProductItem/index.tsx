@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import './styles.sass';
@@ -8,7 +8,7 @@ import { IProductCard } from '../../@types/productCard';
 interface IProductsItemProps {
   isSelected: boolean;
   productsItem: IProductCard;
-  onAddToCartClick: () => void;
+  onAddToCartClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ProductItem = ({ isSelected, productsItem, onAddToCartClick }: IProductsItemProps) => {
