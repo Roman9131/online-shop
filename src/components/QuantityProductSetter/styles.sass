@@ -1,16 +1,16 @@
 .quantity-product
   display: flex
+  width: 60px
   padding: 0
   margin: 10px 0
-  width: 60px
   border: 1.2px solid #dddddd
   border-radius: 3px
 
 .product-counter
   width: 20px
   height: 20px
-  text-align: center
   line-height: 20px
+  text-align: center
 
 .button-increment
   position: relative
@@ -24,17 +24,17 @@
     background: #222222
     transition: transform 0.25s ease-out
   &:after
-    margin-top: -1px
-    width: 50%
     top: 50%
     left: 25%
+    width: 50%
     height: 1.5px
+    margin-top: -1px
   &:before
     top: 24%
     left: 50%
-    margin-left: -1.1px
-    width: 1.5px
     height: 50%
+    width: 1.5px
+    margin-left: -1.1px
   &:hover
     cursor: pointer
   &:disabled
@@ -55,9 +55,9 @@
   &:after
     top: 50%
     left: 25%
-    margin-top: -1px
     width: 50%
     height: 1.5px
+    margin-top: -1px
   &:hover
     cursor: pointer
   &:disabled
