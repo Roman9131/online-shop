@@ -12,12 +12,12 @@ import { IProductCard } from '../@types/productCard';
 import { IProductListState } from '../redusers/productsList';
 import { addProductToCart, getProductsList, IAddProductToCart, IGetProductsList } from '../actions';
 
-interface IPropsFromState {
+interface IMappedProps {
   cart: CartState;
   productsList: IProductListState;
 }
 
-interface IPropsFromDispatch {
+interface IDispatchedProps {
   addProductToCart: IAddProductToCart;
   getProductsList: IGetProductsList;
 }
@@ -26,21 +26,21 @@ interface State {
   searchTerm: string;
 }
 
-const mapStateToProps = (state: IStore): IPropsFromState => {
+const mapStateToProps = (state: IStore): IMappedProps => {
   return {
     cart: state.cart,
     productsList: state.productsList,
   };
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IPropsFromDispatch => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispatchedProps => {
   return {
     addProductToCart: (product: IProductCard) => dispatch(addProductToCart(product)),
     getProductsList: () => dispatch(getProductsList()),
   };
 };
 
-class ProductsList extends React.PureComponent<IPropsFromState & IPropsFromDispatch> {
+class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> {
   state: State = {
     searchTerm: '',
   };
@@ -67,12 +67,12 @@ class ProductsList extends React.PureComponent<IPropsFromState & IPropsFromDispa
       state: { searchTerm },
       props: {
         productsList: { list, error, isLoading },
-        cart: { list: selectedItems },
+        cart: { selectedProductsList: selectedItems },
       },
     } = this;
 
     return (
-      <div className="page-wrapper">
+      <div className="products-list">
         <div className="search-wrapper">
           <form onSubmit={this.onSearchSubmit}>
             <input type="text" value={searchTerm} onChange={this.onSearchChange}/>
@@ -83,10 +83,10 @@ class ProductsList extends React.PureComponent<IPropsFromState & IPropsFromDispa
           <div className="products-wrapper">
             {list.length !== 0 && list.map((item: IProductCard) => {
               const isSelected: boolean = selectedItems &&
-                selectedItems.findIndex(el => el.id === item.id) !== -1;
+                selectedItems.findIndex(el => el.product.id === item.id) !== -1;
               return (
                 <ProductItem
-                  productItem={item}
+                  productsItem={item}
                   isSelected={isSelected}
                   key={item.id}
                   onAddToCartClick={this.addToCart(item)}/>);
