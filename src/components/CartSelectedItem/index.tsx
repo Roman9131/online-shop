@@ -4,12 +4,15 @@ import './styles.sass';
 import { ISelectedProductList } from '../../redusers/cart';
 import QuantityProductSetter from '../QuantityProductSetter';
 import cartIcon from '../../images/cart-icon.svg';
+import { Link } from 'react-router-dom';
 
 interface ICartSelectedItemProps {
   productItem: ISelectedProductList;
   onDeleteFromCartClick: (event: MouseEvent<HTMLDivElement>) => void;
   onIncrementProductClick: (event: MouseEvent<HTMLButtonElement>) => void;
   onDecrementProductClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  setToDetailsClick: (event: MouseEvent<HTMLDivElement>) => void;
+
 }
 
 export default class CartSelectedItem extends React.PureComponent<ICartSelectedItemProps> {
@@ -23,6 +26,7 @@ export default class CartSelectedItem extends React.PureComponent<ICartSelectedI
         onDeleteFromCartClick,
         onIncrementProductClick,
         onDecrementProductClick,
+        setToDetailsClick,
       },
     } = this;
 
@@ -30,12 +34,17 @@ export default class CartSelectedItem extends React.PureComponent<ICartSelectedI
 
     return (
       <div className="product-row">
-        <div className="cart-image-wrapper">
+        <Link className="nav-link" to="/productDetails">
+        <div className="cart-image-wrapper" onClick={setToDetailsClick}>
           <img className="cart-image" alt={name} src={imageUrlSmallSize}/>
         </div>
+        </Link>
         <div className="product-title-wrapper">
-          <h3 className="product-title">{name}</h3>
+          <Link className="nav-link" to="/productDetails">
+          <h3 className="product-title" onClick={setToDetailsClick}>{name}</h3>
+          </Link>
         </div>
+
         <div>
           <QuantityProductSetter quantityOfProduct={quantityOfProduct}
                                  onIncrementProductClick={onIncrementProductClick}

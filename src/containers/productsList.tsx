@@ -10,7 +10,13 @@ import { IStore } from '../redusers';
 import { CartState } from '../redusers/cart';
 import { IProductCard } from '../@types/productCard';
 import { IProductListState } from '../redusers/productsList';
-import { addProductToCart, getProductsList, IAddProductToCart, IGetProductsList } from '../actions';
+import {
+  addProductToCart,
+  getProductsList,
+  IAddProductToCart,
+  IGetProductsList, ISetProductToDetails,
+  setProductToDetails
+} from '../actions';
 
 interface IMappedProps {
   cart: CartState;
@@ -19,6 +25,7 @@ interface IMappedProps {
 
 interface IDispatchedProps {
   addProductToCart: IAddProductToCart;
+  setProductToDetails: ISetProductToDetails;
   getProductsList: IGetProductsList;
 }
 
@@ -36,6 +43,7 @@ const mapStateToProps = (state: IStore): IMappedProps => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispatchedProps => {
   return {
     addProductToCart: (product: IProductCard) => dispatch(addProductToCart(product)),
+    setProductToDetails: (product: IProductCard) => dispatch(setProductToDetails(product)),
     getProductsList: () => dispatch(getProductsList()),
   };
 };
@@ -60,6 +68,11 @@ class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> 
   private addToCart = (item: IProductCard) => () => {
     const { addProductToCart } = this.props;
     addProductToCart(item);
+  };
+
+  private setToDetails = (item: IProductCard) => () => {
+    const { setProductToDetails } = this.props;
+    setProductToDetails(item);
   };
 
   render() {
@@ -89,7 +102,8 @@ class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> 
                   productsItem={item}
                   isSelected={isSelected}
                   key={item.id}
-                  onAddToCartClick={this.addToCart(item)}/>);
+                  onAddToCartClick={this.addToCart(item)}
+                  setToDetailsClick={this.setToDetails(item)}/>);
             })}
             {isLoading && <div><img alt="loader" src={loader}/></div>}
             {error && <div><span className="error-text">Error of download products</span></div>}
