@@ -5,12 +5,14 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import '../styles/cart.sass';
 import { IStore } from '../redusers';
+import { IProductCard } from '../@types/productCard';
 import CartSelectedItem from '../components/CartSelectedItem';
 import { CartState, ISelectedProductList } from '../redusers/cart';
 import {
   deleteProductFromCart, IDeleteProductFromCart,
   incrementProductQuantity, IProductQuantityIncrement,
   decrementProductQuantity, IDecrementProductQuantity,
+  setProductToDetails, ISetProductToDetails,
 } from '../actions';
 
 interface IMappedProps {
@@ -21,6 +23,7 @@ interface IDispatchedProps {
   deleteProductFromCart: IDeleteProductFromCart;
   incrementProductQuantity: IProductQuantityIncrement;
   decrementProductQuantity: IDecrementProductQuantity;
+  setProductToDetails: ISetProductToDetails;
 }
 
 const mapStateToProps = (state: IStore): IMappedProps => {
@@ -34,6 +37,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispat
     deleteProductFromCart: (id: string) => dispatch(deleteProductFromCart(id)),
     incrementProductQuantity: (id: string) => dispatch(incrementProductQuantity(id)),
     decrementProductQuantity: (id: string) => dispatch(decrementProductQuantity(id)),
+    setProductToDetails: (product: IProductCard) => dispatch(setProductToDetails(product)),
   };
 };
 
@@ -54,6 +58,11 @@ class Cart extends React.Component<IMappedProps & IDispatchedProps> {
     decrementProductQuantity(id);
   };
 
+  private setToDetails = (item: IProductCard) => () => {
+    const { setProductToDetails } = this.props;
+    setProductToDetails(item);
+  };
+
   render() {
     const {
       props: {
@@ -62,9 +71,11 @@ class Cart extends React.Component<IMappedProps & IDispatchedProps> {
     } = this;
 
     return (
-      <div>
-        <div>Корзина</div>
+      <div className="card">
         <Link to="/">Вернуться к списку товаров</Link>
+        <div className="card-title">
+          Количество добавленных товаров в корзине: {selectedItems.length !== 0 ? selectedItems.length: '0' }
+        </div>
         <div className="card-list">
           {selectedItems.length !== 0 && selectedItems.map((item: ISelectedProductList) => {
             return (
@@ -74,6 +85,7 @@ class Cart extends React.Component<IMappedProps & IDispatchedProps> {
                 onDeleteFromCartClick={this.deleteProductFromCart(item.product.id)}
                 onIncrementProductClick={this.incrementProductQuantity(item.product.id)}
                 onDecrementProductClick={this.decrementProductQuantity(item.product.id)}
+                setToDetailsClick={this.setToDetails(item.product)}
               />);
           })}
         </div>
