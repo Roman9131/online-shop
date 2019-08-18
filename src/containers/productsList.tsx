@@ -13,9 +13,10 @@ import { IProductListState } from '../redusers/productsList';
 import {
   addProductToCart,
   getProductsList,
+  setProductToDetails,
   IAddProductToCart,
-  IGetProductsList, ISetProductToDetails,
-  setProductToDetails
+  IGetProductsList,
+  ISetProductToDetails,
 } from '../actions';
 
 interface IMappedProps {

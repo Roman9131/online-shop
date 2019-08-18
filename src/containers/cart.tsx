@@ -5,14 +5,15 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import '../styles/cart.sass';
 import { IStore } from '../redusers';
+import { IProductCard } from '../@types/productCard';
 import CartSelectedItem from '../components/CartSelectedItem';
 import { CartState, ISelectedProductList } from '../redusers/cart';
 import {
   deleteProductFromCart, IDeleteProductFromCart,
   incrementProductQuantity, IProductQuantityIncrement,
-  decrementProductQuantity, IDecrementProductQuantity, setProductToDetails, ISetProductToDetails,
+  decrementProductQuantity, IDecrementProductQuantity,
+  setProductToDetails, ISetProductToDetails,
 } from '../actions';
-import { IProductCard } from '../@types/productCard';
 
 interface IMappedProps {
   cart: CartState;

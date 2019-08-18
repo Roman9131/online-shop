@@ -1,18 +1,15 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import '../styles/productDetails.sass';
-import { IProductDetailsState } from '../redusers/productDetails';
-import {
-  addProductToCart,
-  IAddProductToCart
-} from '../actions';
 import { IStore } from '../redusers';
+import { CartState } from '../redusers/cart';
 import { IProductCard } from '../@types/productCard';
 import ProductDetailsItem from '../components/ProductDetailsItem';
-import { CartState } from '../redusers/cart';
-import { Link } from 'react-router-dom';
+import { IProductDetailsState } from '../redusers/productDetails';
+import { addProductToCart, IAddProductToCart } from '../actions';
 
 interface IMappedProps {
   productDetails: IProductDetailsState;
