@@ -12,11 +12,11 @@ import { IProductCard } from '../@types/productCard';
 import { IProductListState } from '../redusers/productsList';
 import {
   addProductToCart,
-  getProductsList,
+  asyncGetProductsList,
   setProductToDetails,
   IAddProductToCart,
-  IGetProductsList,
   ISetProductToDetails,
+  IAsyncGetProductsList,
 } from '../actions';
 
 interface IMappedProps {
@@ -27,7 +27,7 @@ interface IMappedProps {
 interface IDispatchedProps {
   addProductToCart: IAddProductToCart;
   setProductToDetails: ISetProductToDetails;
-  getProductsList: IGetProductsList;
+  asyncGetProductsList: IAsyncGetProductsList;
 }
 
 interface State {
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispat
   return {
     addProductToCart: (product: IProductCard) => dispatch(addProductToCart(product)),
     setProductToDetails: (product: IProductCard) => dispatch(setProductToDetails(product)),
-    getProductsList: () => dispatch(getProductsList()),
+    asyncGetProductsList: () => dispatch(asyncGetProductsList()),
   };
 };
 
@@ -59,10 +59,8 @@ class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> 
   };
 
   private onSearchSubmit = (e: any) => {
-    const { searchTerm } = this.state;
-    console.log(searchTerm);
-    const { getProductsList } = this.props;
-    getProductsList();
+    const { asyncGetProductsList } = this.props;
+    asyncGetProductsList();
     e.preventDefault();
   };
 
