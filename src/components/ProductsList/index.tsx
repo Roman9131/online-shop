@@ -1,78 +1,43 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
 
-import '../styles/productsList.sass';
-import Button from '../components/Button';
-import ProductItem from '../components/ProductItem';
-import loader from '../images/loader.gif';
-import { IStore } from '../redusers';
-import { CartState } from '../redusers/cart';
-import { IProductCard } from '../@types/productCard';
-import { IProductListState } from '../redusers/productsList';
-import {
-  addProductToCart,
-  asyncGetProductsList,
-  setProductToDetails,
-  IAddProductToCart,
-  ISetProductToDetails,
-  IAsyncGetProductsList,
-} from '../actions';
-
-interface IMappedProps {
-  cart: CartState;
-  productsList: IProductListState;
-}
-
-interface IDispatchedProps {
-  addProductToCart: IAddProductToCart;
-  setProductToDetails: ISetProductToDetails;
-  asyncGetProductsList: IAsyncGetProductsList;
-}
+import './styles.sass';
+import Button from '../../components/Button';
+import ProductItem from '../../components/ProductItem';
+import loaderGif from '../../images/loader.gif';
+import { IProductCard } from '../../@types/productCard';
+import { IProductsListContainerProps } from '../../containers/ProductsListContainer';
 
 interface State {
   searchTerm: string;
 }
 
-const mapStateToProps = (state: IStore): IMappedProps => {
-  return {
-    cart: state.cart,
-    productsList: state.productsList,
-  };
-};
+export interface IProductsListProps extends IProductsListContainerProps {
+}
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, void, any>): IDispatchedProps => {
-  return {
-    addProductToCart: (product: IProductCard) => dispatch(addProductToCart(product)),
-    setProductToDetails: (product: IProductCard) => dispatch(setProductToDetails(product)),
-    asyncGetProductsList: () => dispatch(asyncGetProductsList()),
-  };
-};
-
-class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> {
+export default class ProductsList extends React.PureComponent<IProductsListProps> {
   state: State = {
     searchTerm: '',
   };
 
   private onSearchChange = (e: any) => {
     this.setState({ searchTerm: e.target.value });
-  };
+  }
 
   private onSearchSubmit = (e: any) => {
     const { asyncGetProductsList } = this.props;
     asyncGetProductsList();
     e.preventDefault();
-  };
+  }
 
   private addToCart = (item: IProductCard) => () => {
     const { addProductToCart } = this.props;
     addProductToCart(item);
-  };
+  }
 
   private setToDetails = (item: IProductCard) => () => {
     const { setProductToDetails } = this.props;
     setProductToDetails(item);
-  };
+  }
 
   render() {
     const {
@@ -104,7 +69,7 @@ class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> 
                   onAddToCartClick={this.addToCart(item)}
                   setToDetailsClick={this.setToDetails(item)}/>);
             })}
-            {isLoading && <div><img alt="loader" src={loader}/></div>}
+            {isLoading && <div><img alt="loader" src={loaderGif}/></div>}
             {error && <div><span className="error-text">Error of download products</span></div>}
           </div>
         </div>
@@ -112,5 +77,3 @@ class ProductsList extends React.PureComponent<IMappedProps & IDispatchedProps> 
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
